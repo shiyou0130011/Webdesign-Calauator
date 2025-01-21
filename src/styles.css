@@ -1,17 +1,42 @@
 html {
-	font-size: 16px
+	font-size: 18px
 }
 
 body {
-	font-size: 1rem
+	font-size: 1rem;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, Noto Sans CJK TC, Source Han Sans TC, '思源黑體', Noto Sans TC, sans-serif;
+	font-weight: 500;
 }
+
+#default-setting div{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: .5rem;
+}
+#default-setting div label ~ span{
+	flex-grow: 1;
+}
+#default-setting div .unit{
+	flex-grow: 0;
+}
+
+
 
 input {
 	padding: .5rem;
 	font-size: .8rem;
 	text-align: right;
+
+	font-family: Fira Mono, Consola, monospace;
+	font-weight: 500;
 }
 
 #calc-result input {
 	min-width: 100px;
+}
+
+.unit{
+	padding-left: .5rem;
+	padding-right: .5rem;
 }
