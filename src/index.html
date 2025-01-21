@@ -6,18 +6,23 @@
 	<link rel="stylesheet" href="./styles.css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>前端開發計算機</title>
+
+	<link href="./font.css" rel="stylesheet" />
+
 	<script type="module" src="./main.js" defer></script>
 </head>
 
 <body>
 	<form>
-		<div>
-			<label for="rem">1 rem 為多少 px</label><span>：</span>
-			<input id="rem" type="number" step="1" value="16" min="1" /><span>px</span>
-		</div>
-		<div>
-			<label for="vw">螢幕寬度</label><span>：</span>
-			<input id="vw" type="number" step="1" value="1920" min="1" /><span>px</span>
+		<div id="default-setting">
+			<div>
+				<label for="rem">1 rem 為多少 px</label><span>：</span>
+				<input id="rem" type="number" step="1" value="16" min="1" /><span class="unit">px</span>
+			</div>
+			<div>
+				<label for="vw">螢幕寬度</label><span>：</span>
+				<input id="vw" type="number" step="1" value="1920" min="1" /><span class="unit">px</span>
+			</div>
 		</div>
 
 		<hr />
@@ -25,11 +30,11 @@
 		<div id="calc-result">
 			<h2>計算</h2>
 			<br />
-			<input id="calc-rem" type="number" step="0.01" value="1" /><span>rem</span>
+			<input id="calc-rem" type="number" step="0.01" value="1" /><span class="unit">rem</span>
 			<span class="equal">=</span>
-			<input id="calc-px" type="number" step="1" value="16" /><span>px</span>
+			<input id="calc-px" type="number" step="1" value="16" /><span class="unit">px</span>
 			<span class="equal">=</span>
-			<input id="calc-vw" type="number" step="0.00001" value="0.00833" /><span>vw</span>
+			<input id="calc-vw" type="number" step="0.00001" value="0.00833" /><span class="unit">vw</span>
 		</div>
 	</form>
 </body>
