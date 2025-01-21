@@ -62,5 +62,5 @@ jobs:
       - name: deploy
         uses: actions/upload-artifact@v4
         with:
-          path: build
-          name: WebDesignCalc-${{ matrix.platform }}.msi.zip
+          path: src-tauri/target/release/
+          name: WebDesignCalc-${{ matrix.platform }}.zip
