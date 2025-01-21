@@ -1,0 +1,47 @@
+# http://editorconfig.org
+root = true
+
+[*]
+indent_style = tab
+end_of_line = crlf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# yaml style. In project, yaml is used in github workflow. 
+[*.{yml,yaml}]
+indent_style = space
+indent_size = 2
+
+[*.rs]
+indent_style = space
+indent_size = 2
+
+# The JSON files contain newlines inconsistently
+[*.json]
+insert_final_newline = ignore
+
+# 純文字檔，純文字就不需要特別指定排版
+# 結尾 crlf 是避免 windows 記事本無法正常閱讀
+[*.txt]
+end_of_line = crlf
+indent_style = ignore
+
+# Minified JavaScript files shouldn't be changed
+[**.min.{js,css}]
+indent_style = ignore
+insert_final_newline = ignore
+
+[*.{html,js,scss,sass,vue}]
+indent_size = 4
+
+# Makefiles always use tabs for indentation
+[Makefile]
+indent_style = tab
+
+# Batch files use tabs for indentation
+[*.bat]
+indent_style = tab
+
+[*.md]
+trim_trailing_whitespace = false
