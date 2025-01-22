@@ -1,4 +1,4 @@
-name: 'publish'
+name: 'Build and Artifacts'
 
 on:
   workflow_dispatch
@@ -59,8 +59,51 @@ jobs:
           prerelease: false
           args: ${{ matrix.args }}
 
-      - name: deploy
+
+      # Upload Artifacts
+      - name: Artifacts  for Windows
+        if: matrix.platform == 'windows-latest'
+        with:
+          path: src-tauri/target/release/*.exe
+          name: WebDesignCalc-${{ matrix.platform }}-app
+          
+      - name: Install File for Windows
+        if: matrix.platform == 'windows-latest'
+        with:
+          path: |
+            src-tauri/target/release/bundle/msi/*.msi
+            src-tauri/target/release/bundle/nsis/*.exe
+          name: WebDesignCalc-${{ matrix.platform }}-intall-files
+
+        
+      - name: Artifacts APP for Linux
+        if: matrix.platform == 'ubuntu-22.04'
         uses: actions/upload-artifact@v4
         with:
-          path: src-tauri/target/release/*
-          name: WebDesignCalc-${{ matrix.platform }}.zip
+          path: src-tauri/target/release/webdesign-calauator
+          name: WebDesignCalc-${{ matrix.platform }}-app
+          
+      - name: Install File for Linux
+        if: matrix.platform == 'ubuntu-22.04'
+        uses: actions/upload-artifact@v4
+        with:
+          path: |
+            src-tauri/target/release/bundle/*/*.deb
+            src-tauri/target/release/bundle/*/*.rpm
+            src-tauri/target/release/bundle/*/*.AppImage
+            src-tauri/target/release/bundle/*/*.AppImage.*
+          name: WebDesignCalc-${{ matrix.platform }}-intall-files
+
+      - name: Artifacts APP for Intel based Mac
+        if: matrix.platform == 'macos-latest' && 'x86_64-apple-darwin'
+        uses: actions/upload-artifact@v4
+        with:
+          path: src-tauri/target/x86_64-apple-darwin/release/webdesign-calauator
+          name: WebDesignCalc-${{ matrix.platform }}-app
+
+      - name: Install File for Intel based Mac
+        if: matrix.platform == 'macos-latest' && 'x86_64-apple-darwin'
+        uses: actions/upload-artifact@v4
+        with:
+          path: src-tauri/target/x86_64-apple-darwin/release/bundle/*
+          name: WebDesignCalc-${{ matrix.platform }}-intall-files
