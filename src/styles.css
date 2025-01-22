@@ -56,3 +56,35 @@ input {
 	padding-left: .5rem;
 	padding-right: .5rem;
 }
+/* grid styles */
+#calc-result{
+	display: grid;
+	grid-template-columns: auto 5rem;
+
+	align-items: center;
+}
+#calc-result h1, 
+#calc-result h2,
+#calc-result h3,
+#calc-result br {
+	grid-columns: 1 / 3;
+}
+#calc-result input{
+	grid-columns: 1 / 2;
+}
+#calc-result .unit{
+	grid-columns: 2 / 3;
+}
+#calc-result .equal{
+	grid-columns: 1 / 3;
+
+	writing-mode: vertical-rl;
+	
+	font-size: 1.5rem;
+	font-weight: 700;
+	
+	display: flex;
+	min-height: 2rem;
+	align-items: center;
+	justify-content: center;
+}
