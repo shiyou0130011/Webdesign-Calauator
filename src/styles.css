@@ -6,9 +6,11 @@ body {
 	font-size: 1rem;
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, Noto Sans CJK TC, Source Han Sans TC, '思源黑體', Noto Sans TC, sans-serif;
 	font-weight: 500;
-
-	/* 暗鳶色 */
-	color: #33130F;  
+}
+header{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 header img{
@@ -33,8 +35,6 @@ header h1{
 	flex-grow: 0;
 }
 
-
-
 input {
 	padding: .5rem;
 	font-size: .8rem;
@@ -43,7 +43,8 @@ input {
 	font-family: Fira Mono, Consola, monospace;
 	font-weight: 500;
 
-	color: #333;
+	border-style: solid;
+	border-radius: .25rem;
 }
 
 #calc-result input {
