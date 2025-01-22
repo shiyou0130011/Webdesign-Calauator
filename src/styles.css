@@ -14,7 +14,8 @@ header{
 }
 
 header img{
-	height: 2.6rem;
+	height: 3.5rem;
+	filter: drop-shadow(0px 0px 1px white);
 }
 header h1{
 	font-family: 'Times New Roman', Times, Noto Serif CJK TC, Source Han Serif TC, '思源宋體', Noto Serif TC, serif;
