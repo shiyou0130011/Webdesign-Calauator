@@ -4,8 +4,20 @@ html {
 
 body {
 	font-size: 1rem;
-	font-family:'Segoe UI', Tahoma, Geneva, Verdana, Noto Sans CJK TC, Source Han Sans TC, '思源黑體', Noto Sans TC, sans-serif;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, Noto Sans CJK TC, Source Han Sans TC, '思源黑體', Noto Sans TC, sans-serif;
 	font-weight: 500;
+
+	/* 暗鳶色 */
+	color: #33130F;  
+}
+
+header img{
+	height: 2.6rem;
+}
+header h1{
+	font-family: 'Times New Roman', Times, Noto Serif CJK TC, Source Han Serif TC, '思源宋體', Noto Serif TC, serif;
+	font-weight: 900;
+	font-size: 2.2rem;
 }
 
 #default-setting div{
@@ -30,6 +42,8 @@ input {
 
 	font-family: Fira Mono, Consola, monospace;
 	font-weight: 500;
+
+	color: #333;
 }
 
 #calc-result input {
