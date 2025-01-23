@@ -6,6 +6,8 @@ body {
 	font-size: 1rem;
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, Noto Sans CJK TC, Source Han Sans TC, '思源黑體', Noto Sans TC, sans-serif;
 	font-weight: 500;
+
+	user-select: none;
 }
 header{
 	display: flex;
@@ -63,28 +65,28 @@ input {
 
 	align-items: center;
 }
-#calc-result h1, 
+#calc-result h1,
 #calc-result h2,
 #calc-result h3,
 #calc-result br {
-	grid-columns: 1 / 3;
+	grid-column: 1 / 3;
 }
 #calc-result input{
-	grid-columns: 1 / 2;
+	grid-column: 1 / 2;
 }
 #calc-result .unit{
-	grid-columns: 2 / 3;
+	grid-column: 2 / 3;
 }
 #calc-result .equal{
-	grid-columns: 1 / 3;
+	grid-column: 1 / 3;
 
 	writing-mode: vertical-rl;
-	
-	font-size: 1.5rem;
+
+	font-size: 2rem;
 	font-weight: 700;
-	
+
 	display: flex;
-	min-height: 2rem;
+	min-height: 2.5rem;
 	align-items: center;
 	justify-content: center;
 }
