@@ -1,10 +1,13 @@
 [package]
 name = "webdesign-calauator"
 version = "0.1.0"
-description = "A Tauri App"
-authors = ["you"]
+description = "A calcuator APP for web design"
+authors = ["Tzuyang Tsai <shiyou0130011@gmail.com>"]
 edition = "2021"
-
+repository = "https://github.com/shiyou0130011/Webdesign-Calauator"
+license = "Apache-2.0"
+license-file = "../LICENSE"
+publish = false
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [lib]
