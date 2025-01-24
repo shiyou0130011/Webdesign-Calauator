@@ -12,7 +12,8 @@
 			{
 				"title": "webdesign-calauator",
 				"width": 436,
-				"height": 600
+				"height": 600,
+				"resizable" :false
 			}
 		],
 		"security": {
