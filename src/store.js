@@ -1,38 +1,32 @@
-import { load } from '@tauri-apps/plugin-store'
+const { load } = window.__TAURI__.store
 
 const store = await load('wdc-store.json', { autoSave: false })
-
 store.get('rem-val')
 	.then(function(val){
 		if(val && val > 0){
-			window.addEventListener("DOMContentLoaded", function () {
-				document.querySelector("#rem").value = val 
-				document.querySelector("#rem").dispatchEvent(new CustomEvent("change"))
-			}
+			document.querySelector("#rem").value = val
+			document.querySelector("#rem").dispatchEvent(new CustomEvent("change"))
 		}
 	})
 store.get('vw-val')
 	.then(function(val){
 		if(val && val > 0){
-			window.addEventListener("DOMContentLoaded", function () {
-				document.querySelector("#vw").value = val 
-				document.querySelector("#vw").dispatchEvent(new CustomEvent("change"))
-			}
+			document.querySelector("#vw").value = val
+			document.querySelector("#vw").dispatchEvent(new CustomEvent("change"))
 		}
 	})
-window.addEventListener("DOMContentLoaded", function () {	
-	document.querySelector("#rem").addEventListener("change", function(){
-		store.set('rem-val', this.value)
-			.then(function(){
-				return store.save()
-			})
-	})
-	
-	document.querySelector("#vw").addEventListener("change", function(){
-		store.set('vw-val', this.value)
-			.then(function(){
-				return store.save()
-			})
-	})
-}
 
+
+document.querySelector("#rem").addEventListener("change", function(){
+	store.set('rem-val', this.value)
+		.then(function(){
+			return store.save()
+		})
+})
+
+document.querySelector("#vw").addEventListener("change", function(){
+	store.set('vw-val', this.value)
+		.then(function(){
+			return store.save()
+		})
+})
