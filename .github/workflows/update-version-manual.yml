@@ -1,0 +1,60 @@
+name: Update Version
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'New Version'
+        required: true
+        default: 'minor'
+        type: choice
+        options:
+        - major
+        - minor
+        - patch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4 
+      - name: set git setting
+        run: |
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          git config --global user.name "${{ github.actor }}"
+      
+      - name: set up node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          
+      - name: update node.js version
+        run: npm version ${{ inputs.version }} --no-git-tag-version
+      - run: node -p "'NEW_VER=' + require('./package.json').version" >> $GITHUB_ENV
+
+      - name: update cargo version
+        run: sed -i "0,/version = \"[^\"]*\"/s//version = \"${{ env.NEW_VER }}\"/"
+          
+      - name: commit
+        run: |
+          git commit -m "📈 Update ${{ inputs.version }} version" -a --author "Github Action<action@github.com>"
+          git tag -a v${{ env.NEW_VER }}
+        
+      
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.ACCESS_TOKEN }}
+          branch: ${{ github.ref }}
+          tags: true
+
+      # - name: set tag to enviroment variable
+      #   run: echo "LAST_VER=`git describe --tags --abbrev=0`" >> $GITHUB_ENV
+
+      # - name: Create a Release in a GitHub Action
+      #   uses: comnoco/create-release-action@v2.0.5
+      #   continue-on-error: true
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      #   with:
+      #     tag_name: ${{ env.LAST_VER }}
+      #     release_name: ${{ env.LAST_VER }}
