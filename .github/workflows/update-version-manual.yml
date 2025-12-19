@@ -32,7 +32,8 @@ jobs:
       - run: node -p "'NEW_VER=' + require('./package.json').version" >> $GITHUB_ENV
 
       - name: update cargo version
-        run: sed -i "0,/version = \"[^\"]*\"/s//version = \"${{ env.NEW_VER }}\"/"
+        working-directory: "${{ github.workspace }}/src-tauri"
+        run: sed -i "0,/version = \"[^\"]*\"/s//version = \"${{ env.NEW_VER }}\"/" Cargo.toml
           
       - name: commit
         run: |
