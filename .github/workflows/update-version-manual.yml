@@ -1,4 +1,4 @@
-name: Update Version
+name: Update Version Manually
 on:
   workflow_dispatch:
     inputs:
@@ -37,8 +37,8 @@ jobs:
           
       - name: commit
         run: |
-          git commit -m "📈 Update ${{ inputs.version }} version" -a
-          git tag -a v${{ env.NEW_VER }} -m "📈 Update ${{ inputs.version }} version" 
+          git commit -m "📈 Update ${{ inputs.version }} version" -a --author "Github Action<action@github.com>"
+          git tag -a v${{ env.NEW_VER }} -m "📈 Update ${{ inputs.version }} version" -
         
       
       - name: Push changes
