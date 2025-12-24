@@ -38,7 +38,7 @@ jobs:
       - name: commit
         run: |
           git commit -m "📈 Update ${{ inputs.version }} version" -a --author "Github Action<action@github.com>"
-          git tag -a v${{ env.NEW_VER }} -m "📈 Update ${{ inputs.version }} version" -
+          git tag -a v${{ env.NEW_VER }} -m "📈 Update ${{ inputs.version }} version" 
         
       
       - name: Push changes
