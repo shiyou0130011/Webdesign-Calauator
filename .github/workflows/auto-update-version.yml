@@ -1,0 +1,62 @@
+name: Auto Update Version 
+on:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - 'src/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4 
+      - name: set git setting
+        run: |
+          git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
+          git config --global user.name "${{ github.actor }}"
+      
+      - name: set up node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: get current version
+        run: |
+          echo node -p "'CURRENT_VER=' + require('./package.json').version" >> $GITHUB_ENV 
+      # 
+      # 取得最新 tag 的 package.json
+      # 由於 tag 名稱不保證一定是最新的版本號
+      # 所以保險起見，抓最新 tag 的 package.json
+      #
+      
+      - name: get last released version 
+        run: |
+          git show `git describe --tags --abbrev=0`:package.json > /tmp/old-package.json
+          echo node -p "'LAST_VER=' + require('/tmp/old-package.json').version" >> $GITHUB_ENV 
+
+      - name: update node.js version
+        if: ${{ env.LAST_VER >= env.CURRENT_VER }}
+        run: npm version prerelease --no-git-tag-version
+
+      - run: node -p "'NEW_VER=' + require('./package.json').version" >> $GITHUB_ENV
+        if: ${{ env.LAST_VER >= env.CURRENT_VER }}
+
+
+      - name: update cargo version
+        if: ${{ env.LAST_VER >= env.CURRENT_VER }}
+        working-directory: "${{ github.workspace }}/src-tauri"
+        run: sed -i "0,/version = \"[^\"]*\"/s//version = \"${{ env.NEW_VER }}\"/" Cargo.toml
+          
+      - name: commit
+        if: ${{ env.LAST_VER >= env.CURRENT_VER }}
+        run: |
+          git commit -m "📈 Update ${{ inputs.version }} version" -a --author "Github Action<65916846+actions-user@users.noreply.github.com>"
+         
+      - name: Push changes
+        if: ${{ env.LAST_VER >= env.CURRENT_VER }}
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.ACCESS_TOKEN }}
+          branch: ${{ github.ref }}
+          tags: true
