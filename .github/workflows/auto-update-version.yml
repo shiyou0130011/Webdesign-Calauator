@@ -21,6 +21,13 @@ jobs:
         with:
           node-version: 20
 
+      - name: get last tag & current version
+        run: |
+          echo "OLD_TAG=`git describe --tags --abbrev=0` >> $GITHUB_ENV 
+          echo node -p "'CURRENT_VER=' + 'v' + require('./package.json').version" >> $GITHUB_ENV 
+          
+        
+
       - name: update node.js version
         run: npm version prerelease --no-git-tag-version
 
