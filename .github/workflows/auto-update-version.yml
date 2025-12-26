@@ -21,12 +21,19 @@ jobs:
         with:
           node-version: 20
 
-      - name: get last tag & current version
+      - name: get current version
         run: |
-          echo "OLD_TAG=`git describe --tags --abbrev=0` >> $GITHUB_ENV 
-          echo node -p "'CURRENT_VER=' + 'v' + require('./package.json').version" >> $GITHUB_ENV 
-          
-        
+          echo node -p "'CURRENT_VER=' + require('./package.json').version" >> $GITHUB_ENV 
+      # 
+      # 取得最新 tag 的 package.json
+      # 由於 tag 名稱不保證一定是最新的版本號
+      # 所以保險起見，抓最新 tag 的 package.json
+      #
+      
+      - name: get last released version 
+        run: |
+          git show `git describe --tags --abbrev=0`:package.json > /tmp/old-package.json
+          echo node -p "'LAST_VER=' + require('/tmp/old-package.json').version" >> $GITHUB_ENV 
 
       - name: update node.js version
         run: npm version prerelease --no-git-tag-version
