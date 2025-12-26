@@ -36,20 +36,25 @@ jobs:
           echo node -p "'LAST_VER=' + require('/tmp/old-package.json').version" >> $GITHUB_ENV 
 
       - name: update node.js version
+        if: ${{ env.LAST_VER >= env.CURRENT_VER }}
         run: npm version prerelease --no-git-tag-version
 
       - run: node -p "'NEW_VER=' + require('./package.json').version" >> $GITHUB_ENV
+        if: ${{ env.LAST_VER >= env.CURRENT_VER }}
 
 
       - name: update cargo version
+        if: ${{ env.LAST_VER >= env.CURRENT_VER }}
         working-directory: "${{ github.workspace }}/src-tauri"
         run: sed -i "0,/version = \"[^\"]*\"/s//version = \"${{ env.NEW_VER }}\"/" Cargo.toml
           
       - name: commit
+        if: ${{ env.LAST_VER >= env.CURRENT_VER }}
         run: |
           git commit -m "📈 Update ${{ inputs.version }} version" -a --author "Github Action<65916846+actions-user@users.noreply.github.com>"
          
       - name: Push changes
+        if: ${{ env.LAST_VER >= env.CURRENT_VER }}
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.ACCESS_TOKEN }}
