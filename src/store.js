@@ -1,5 +1,10 @@
+const { invoke } = window.__TAURI__.core
 const { load } = window.__TAURI__.store
 
+async function greet() {
+	// Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
+	greetMsgEl.textContent = await invoke("greet", { status: "success" });
+}
 const store = await load('wdc-store.json', { autoSave: false })
 store.get('rem-val')
 	.then(function(val){
