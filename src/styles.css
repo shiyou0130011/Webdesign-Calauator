@@ -26,16 +26,13 @@ header h1{
 }
 
 #default-setting div{
-	display: flex;
-	justify-content: space-between;
+	display: grid; 
+	grid-template-columns: 40vw 1rem 1fr 2rem 1rem 1fr 2rem;
 	align-items: center;
 	margin-bottom: .5rem;
 }
-#default-setting div label ~ span{
-	flex-grow: 1;
-}
-#default-setting div .unit{
-	flex-grow: 0;
+#default-setting div input#rem{
+	grid-column: span 4;
 }
 
 input {
