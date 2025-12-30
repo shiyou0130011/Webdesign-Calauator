@@ -23,7 +23,7 @@ jobs:
 
       - name: get current version
         run: |
-          echo node -p "'CURRENT_VER=' + require('./package.json').version" >> $GITHUB_ENV 
+          node -p "'CURRENT_VER=' + require('./package.json').version" >> $GITHUB_ENV 
       # 
       # 取得最新 tag 的 package.json
       # 由於 tag 名稱不保證一定是最新的版本號
@@ -33,7 +33,7 @@ jobs:
       - name: get last released version 
         run: |
           git show `git describe --tags --abbrev=0`:package.json > /tmp/old-package.json
-          echo node -p "'LAST_VER=' + require('/tmp/old-package.json').version" >> $GITHUB_ENV 
+          node -p "'LAST_VER=' + require('/tmp/old-package.json').version" >> $GITHUB_ENV 
 
       - name: update node.js version
         if: ${{ env.LAST_VER >= env.CURRENT_VER }}
